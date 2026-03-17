@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evolution - Gaming Store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background-color: #121212;
+      color: lightblue;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+    }
+    header, footer {
+      background-color: #1a1a1a;
+      padding: 1rem;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      padding: 0;
+      list-style: none;
+    }
+    nav ul li a {
+      cursor: pointer;
+      color: lightblue;
+      text-decoration: underline;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: cyan;
+    }
+    section {
+      display: none;
+      padding: 2rem;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    section.active {
+      display: block;
+    }
+    .btn {
+      background-color: #00ffff;
+      color: black;
+      padding: 0.5rem 1rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      background-color: #1f1f1f;
+      color: lightblue;
+      border: 1px solid #444;
+    }
+    ul li {
+      margin-bottom: 1rem;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav ul { flex-direction: column; gap: 0.5rem; }
+      section { padding: 1rem; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Evolution</h1>
+    <nav>
+      <ul>
+        <li><a onclick="showSection('home')">Home</a></li>
+        <li><a onclick="showSection('about')">About</a></li>
+        <li><a onclick="showSection('shop')">Shop</a></li>
+        <li><a onclick="showSection('product')">Product</a></li>
+        <li><a onclick="showSection('reviews')">Reviews</a></li>
+        <li><a onclick="showSection('blog')">Blog</a></li>
+        <li><a onclick="showSection('contact')">Contact</a></li>
+        <li><a onclick="showSection('cart')">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="active">
+      <h2>Welcome to Evolution</h2>
+      <p>Your ultimate destination for gaming gear, consoles, and top-rated reviews.</p>
+    </section>
+
+    <section id="about">
+      <h2>About Evolution</h2>
+      <p>We are passionate about gaming. Evolution provides cutting-edge games and accessories for hardcore gamers and casual players alike.</p>
+    </section>
+
+    <section id="shop">
+      <h2>Shop</h2>
+      <ul>
+        <li>PlayStation 5 - £499.99 <button class="btn" onclick="addToCart('PlayStation 5')">Add to Cart</button></li>
+        <li>Xbox Series X - £479.99 <button class="btn" onclick="addToCart('Xbox Series X')">Add to Cart</button></li>
+        <li>Nintendo Switch - £279.99 <button class="btn" onclick="addToCart('Nintendo Switch')">Add to Cart</button></li>
+        <li>Call of Duty: Modern Warfare III - £69.99 <button class="btn" onclick="addToCart('Modern Warfare III')">Add to Cart</button></li>
+        <li>Logitech G Pro Headset - £89.99 <button class="btn" onclick="addToCart('Logitech G Pro Headset')">Add to Cart</button></li>
+      </ul>
+    </section>
+
+    <section id="product">
+      <h2>Product: PlayStation 5</h2>
+      <p>The PlayStation 5 features lightning-fast load times, stunning graphics, and an immersive controller experience.</p>
+      <p><strong>Price:</strong> £499.99</p>
+      <button class="btn" onclick="addToCart('PlayStation 5')">Add to Cart</button>
+    </section>
+
+    <section id="reviews">
+      <h2>Customer Reviews</h2>
+      <p>"Evolution has the best range of gaming gear I’ve seen online." – Alex R.</p>
+      <p>"Fast delivery and excellent customer service. Highly recommended!" – Sam K.</p>
+    </section>
+
+    <section id="blog">
+      <h2>Blog</h2>
+      <article>
+        <h3>Top 5 Games to Play in 2025</h3>
+        <p>Discover the hottest titles coming to PC, PS5, and Xbox Series X this year.</p>
+      </article>
+      <article>
+        <h3>Gaming Hardware: Worth the Upgrade?</h3>
+        <p>We test the latest GPUs and CPUs to see if they're worth your money.</p>
+      </article>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form onsubmit="event.preventDefault(); alert('Message sent!');">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send</button>
+      </form>
+    </section>
+
+    <section id="cart">
+      <h2>Your Cart</h2>
+      <ul id="cartItems"></ul>
+      <p>Continue shopping <span style="text-decoration: underline; cursor: pointer; color: lightblue;" onclick="showSection('shop')">here</span>.</p>
+      <button class="btn" onclick="clearCart()">Clear Cart</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Evolution Gaming Store</p>
+  </footer>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function addToCart(item) {
+      const cartList = document.getElementById('cartItems');
+      const li = document.createElement('li');
+      li.textContent = item;
+      cartList.appendChild(li);
+      showSection('cart');
+    }
+
+    function clearCart() {
+      const cartList = document.getElementById('cartItems');
+      cartList.innerHTML = '';
+    }
+  </script>
+</body>
+</html>
