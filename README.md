@@ -14,6 +14,8 @@ I am an aspiring software developer, keen to turn my passion for coding into a c
 - File: Evolution.html
 
 ### League Database 
+![Database Screenshot](sqlone.png)
+![Database Screenshot](sqltwo.png)
 - Description: A database project storing league data (Data for a football league)
 - Skills: SQL, Databases, Integration Testing
 - File: League Database.db
